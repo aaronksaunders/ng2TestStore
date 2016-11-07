@@ -3,6 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { MaterialModule } from '@angular/material';
+
+import {StoreModule} from '@ngrx/store';
+import { peopleReducer } from './people'
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -12,7 +16,9 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    StoreModule.provideStore({people: peopleReducer}),
+    MaterialModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,3 +1,23 @@
 <h1>
   {{title}}
 </h1>
+<div class="app-content">
+  <div>
+    <button md-raised-button (click)="addPerson(aPerson)">Add Person</button>
+    <md-input #aPerson placeholder="Enter Name" maxlength="50">
+      <md-hint align="end">
+        {{aPerson.characterCount}} / 50
+      </md-hint>
+    </md-input>
+    <h2>Current Users: {{ (peopleArray | async)?.length }}</h2>
+  </div>
+  <md-list>
+    <md-list-item *ngFor="let p of (peopleArray | async)">
+      <h2 md-line>{{ p.name }} </h2>
+      <div md-line>{{ p.id }} </div>
+      <div md-line>
+        <button md-raised-button (click)="removePerson(p)">DELETE</button>
+      </div>
+    </md-list-item>
+  </md-list>
+</div>
