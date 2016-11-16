@@ -1,20 +1,19 @@
+import {ActionReducer, Action} from '@ngrx/store';
+import {UUID} from 'angular2-uuid';
 
-import { ActionReducer, Action } from '@ngrx/store';
-import { UUID } from 'angular2-uuid';
-
-export const peopleReducer:ActionReducer<any> = (state = [], action:Action) => {
+export const peopleReducer: ActionReducer<any> = (state = [], action: Action) => {
     switch (action.type) {
-        
+
         case 'ADD_PERSON':
             let uuid = UUID.UUID();
             return [
                 ...state,
-                { id: uuid, name : action.payload }
+                Object.assign({id: uuid}, action.payload)
             ];
-        
+
         case 'REMOVE_PERSON':
 
-            let idx = state.findIndex((_item)  => { 
+            let idx = state.findIndex((_item) => {
                 return action.payload.id === _item.id;
             })
 
