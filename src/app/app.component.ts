@@ -67,7 +67,10 @@ export class AppComponent {
         this
             ._store
             .dispatch({type: 'ADD_PERSON', payload: _person.value});
-        //_person.resetForm()
+
+        // reset the form
+        this.simpleForm.reset();
+
     }
 
 
