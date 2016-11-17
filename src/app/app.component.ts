@@ -3,6 +3,16 @@ import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms'
 
+
+/**
+ *
+ */
+export interface Person {
+    firstName : String,
+    lastName : String,
+    id : String,
+}
+
 interface AppState {
     /**
      *
@@ -10,7 +20,7 @@ interface AppState {
      * @type {Array<String>}
      * @memberOf AppState
      */
-    peopleArray: Array<String>;
+    peopleArray: Array<Person>;
 }
 
 /**

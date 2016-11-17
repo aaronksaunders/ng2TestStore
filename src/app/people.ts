@@ -1,7 +1,9 @@
 import {ActionReducer, Action} from '@ngrx/store';
 import {UUID} from 'angular2-uuid';
+import {Person} from "./app.component";
 
-export const peopleReducer: ActionReducer<any> = (state = [], action: Action) => {
+
+export const peopleReducer: ActionReducer<Array<Person>> = (state = [], action: Action) => {
     switch (action.type) {
 
         case 'ADD_PERSON':
