@@ -7,6 +7,7 @@ The purpose of this application is to work with
 - Angular-cli - https://github.com/angular/angular-cli
 - ngrx/store - https://github.com/ngrx/store
 - Angular Material 2 - https://material.angular.io/
+- Angular Forms - https://toddmotto.com/angular-2-forms-reactive
 
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
