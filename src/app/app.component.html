@@ -4,20 +4,23 @@
 <div class="app-content">
     <div>
 
-        <form [formGroup]="simpleForm" (ngSubmit)="addPerson(simpleForm)">
+        <form novalidate [formGroup]="simpleForm" (ngSubmit)="addPerson(simpleForm)">
             <md-input #fn placeholder="First Name" maxlength="50"
-                      [formControl]="simpleForm.controls['firstName']">
+                      formControlName='firstName'>
                 <md-hint align="end">
                     {{fn.characterCount}} / 50
                 </md-hint>
             </md-input>
-            <md-input #ln placeholder="Last Name" maxlength="50"
-                      [formControl]="simpleForm.controls['lastName']">
+            <md-input #ln placeholder="Last Name" maxlength="50" formControlName='lastName'>
                 <md-hint align="end">
                     {{ln.characterCount}} / 50
                 </md-hint>
             </md-input>
             <button type="submit" md-raised-button [disabled]="!simpleForm.valid">Add Person</button>
+
+            <!-- display errors -->
+            <div>{{errorHelper('firstName') | json }}</div>
+            <div>{{errorHelper('lastName') | json }}</div>
         </form>
         <h2>Current Users: {{ (peopleArray | async)?.length }}</h2>
     </div>
