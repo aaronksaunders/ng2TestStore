@@ -1,5 +1,5 @@
-import {Component, OnInit } from '@angular/core';
-import {Store} from '@ngrx/store';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
 import {FormGroup, FormControl, Validators} from '@angular/forms'
 
@@ -34,8 +34,7 @@ interface AppState {
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit{
     /**
      *
      *
@@ -58,17 +57,25 @@ export class AppComponent implements OnInit {
      *
      * @memberOf AppComponent
      */
-    constructor(private _store: Store<AppState> ) {
+    constructor ( private _store: Store<AppState> ) {
         this.peopleArray = _store.select('people');
     }
-
+    /**
+     *
+     * @memberOf AppComponent
+     */
     ngOnInit () {
         this.simpleForm = new FormGroup({
             'firstName': new FormControl('', [Validators.required, Validators.minLength(5)]),
             'lastName': new FormControl('', [Validators.required, Validators.minLength(5)]),
         });
     }
+    /**
 
+     * @param {string} _controlName
+     *
+     * @memberOf AppComponent
+     */
     errorHelper(_controlName:string) {
         let control = this.simpleForm.controls[_controlName]
         if (!control.pristine && control.errors) {
