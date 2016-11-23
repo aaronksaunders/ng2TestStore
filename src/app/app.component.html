@@ -1,42 +1,37 @@
 <h1>
-   PAGE - {{title}}
+  {{title}}
 </h1>
 <div class="app-content">
-    <div>
+  <div>
 
-        <form [formGroup]="simpleForm" (ngSubmit)="addPerson(simpleForm)">
-            <md-input #fn placeholder="First Name" maxlength="50"
-                      [formControl]="simpleForm.controls['firstName']">
-                <md-hint align="end">
-                    {{fn.characterCount}} / 50
-                </md-hint>
-            </md-input>
-            <em *ngIf="simpleForm.controls['firstName'].hasError('minlength')">Must be at least 8 characters</em>
-            <md-input #ln placeholder="Last Name" maxlength="50"
-                      [formControl]="simpleForm.controls['lastName']">
-                <md-hint align="end">
-                    {{ln.characterCount}} / 50
-                </md-hint>
-            </md-input>
-            <button type="submit" md-raised-button [disabled]="!simpleForm.valid">Add Person</button>
-<<<<<<< HEAD
+    <form novalidate [formGroup]="simpleForm" (ngSubmit)="addPerson(simpleForm)">
+      <md-input #fn placeholder="First Name" maxlength="50"
+                formControlName='firstName'>
+        <md-hint align="end">
+          {{fn.characterCount}} / 50
+        </md-hint>
+      </md-input>
+      <md-input #ln placeholder="Last Name" maxlength="50" formControlName='lastName'>
+        <md-hint align="end">
+          {{ln.characterCount}} / 50
+        </md-hint>
+      </md-input>
+      <button type="submit" md-raised-button [disabled]="!simpleForm.valid">Add Person</button>
 
-            <!-- display errors -->
-          <p>ERRORS:</p>
-            <div>{{errorHelper('firstName') | json }}</div>
-            <div>{{errorHelper('lastName') | json }}</div>
-=======
->>>>>>> origin/master
-        </form>
-        <h2>Current Users: {{ (peopleArray | async)?.length }}</h2>
-    </div>
-    <md-list>
-        <md-list-item *ngFor="let p of (peopleArray | async)">
-            <h2 md-line>{{ p.firstName }} {{p.lastName}}</h2>
-            <div md-line>{{ p.id }}</div>
-            <div md-line>
-                <button md-raised-button (click)="removePerson(p)">DELETE</button>
-            </div>
-        </md-list-item>
-    </md-list>
+      <!-- display errors -->
+      <p>ERRORS:</p>
+      <div>{{errorHelper('firstName') | json }}</div>
+      <div>{{errorHelper('lastName') | json }}</div>
+    </form>
+    <h2>Current Users: {{ (peopleArray | async)?.length }}</h2>
+  </div>
+  <md-list>
+    <md-list-item *ngFor="let p of (peopleArray | async)">
+      <h2 md-line>{{ p.firstName }} {{p.lastName}}</h2>
+      <div md-line>{{ p.id }}</div>
+      <div md-line>
+        <button md-raised-button (click)="removePerson(p)">DELETE</button>
+      </div>
+    </md-list-item>
+  </md-list>
 </div>
