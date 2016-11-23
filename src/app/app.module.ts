@@ -7,11 +7,12 @@ import { MaterialModule } from '@angular/material';
 
 import {StoreModule} from '@ngrx/store';
 import { peopleReducer } from './people'
-import { AppComponent } from './app.component';
+import {AppComponent, JazzDialog} from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    JazzDialog
   ],
   imports: [
     BrowserModule,
@@ -22,6 +23,7 @@ import { AppComponent } from './app.component';
     MaterialModule.forRoot()
   ],
   providers: [],
+  entryComponents: [JazzDialog],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

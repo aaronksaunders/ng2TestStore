@@ -16,7 +16,7 @@
           {{ln.characterCount}} / 50
         </md-hint>
       </md-input>
-      <button type="submit" md-raised-button [disabled]="!simpleForm.valid">Add Person</button>
+      <button type="submit" md-raised-button  color="primary" [disabled]="!simpleForm.valid">Add Person</button>
 
       <!-- display errors -->
       <p>ERRORS:</p>
@@ -29,9 +29,11 @@
     <md-list-item *ngFor="let p of (peopleArray | async)">
       <h2 md-line>{{ p.firstName }} {{p.lastName}}</h2>
       <div md-line>{{ p.id }}</div>
-      <div md-line>
+      <p md-line>
         <button md-raised-button (click)="removePerson(p)">DELETE</button>
-      </div>
+        <button md-raised-button (click)="editPerson(p)">EDIT</button>
+      </p>
+
     </md-list-item>
   </md-list>
 </div>

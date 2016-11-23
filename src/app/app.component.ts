@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
+import {Store} from '@ngrx/store';
 import {FormGroup, FormControl, Validators} from '@angular/forms'
 
+import {MdDialog, MdDialogRef, MdDialogConfig} from '@angular/material';
 
 /**
  *
  */
 export interface Person {
-  firstName : String,
-  lastName : String,
-  id : String,
+  firstName: String,
+  lastName: String,
+  id: String,
 }
 
 interface AppState {
@@ -22,6 +23,19 @@ interface AppState {
   peopleArray: Array<Person>;
 }
 
+
+@Component({
+  selector: 'demo-jazz-dialog',
+  templateUrl: './dialog.html',
+})
+export class JazzDialog {
+  jazzMessage = 'Jazzy jazz jazz';
+
+  constructor(public dialogRef: MdDialogRef<JazzDialog>) {
+  }
+}
+
+
 /**
  *
  *
@@ -33,7 +47,7 @@ interface AppState {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   /**
    *
    *
@@ -49,6 +63,9 @@ export class AppComponent implements OnInit{
   peopleArray;
   simpleForm: FormGroup;
 
+  dialogRef: MdDialogRef<JazzDialog>;
+  lastCloseResult: string;
+
   /**
    * Creates an instance of AppComponent.
    *
@@ -56,31 +73,34 @@ export class AppComponent implements OnInit{
    *
    * @memberOf AppComponent
    */
-  constructor ( private _store: Store<AppState> ) {
+  constructor(private _store: Store<AppState>, public _dialog: MdDialog, public viewContainerRef: ViewContainerRef) {
     this.peopleArray = _store.select('people');
   }
+
   /**
    *
    * @memberOf AppComponent
    */
-  ngOnInit () {
+  ngOnInit() {
     this.simpleForm = new FormGroup({
       'firstName': new FormControl('', [Validators.required, Validators.minLength(5)]),
       'lastName': new FormControl('', [Validators.required, Validators.minLength(5)]),
     });
   }
+
   /**
 
    * @param {string} _controlName
    *
    * @memberOf AppComponent
    */
-  errorHelper(_controlName:string) {
+  errorHelper(_controlName: string) {
     let control = this.simpleForm.controls[_controlName]
     if (!control.pristine && control.errors) {
       return control.errors
     }
   }
+
   /**
 
    * @param {any} _person
@@ -97,6 +117,28 @@ export class AppComponent implements OnInit{
 
   }
 
+  /**
+
+   * @param {any} _person
+   *
+   * @memberOf AppComponent
+   */
+  editPerson(_person) {
+    this
+      ._store
+      .dispatch({type: 'EDIT_PERSON', payload: _person.value});
+
+    let config = new MdDialogConfig();
+    config.viewContainerRef = this.viewContainerRef;
+
+    this.dialogRef = this._dialog.open(JazzDialog, config);
+
+    this.dialogRef.afterClosed().subscribe(result => {
+      this.lastCloseResult = result;
+      this.dialogRef = null;
+    });
+  }
+
 
   /**
    *
@@ -108,5 +150,6 @@ export class AppComponent implements OnInit{
     this
       ._store
       .dispatch({type: 'REMOVE_PERSON', payload: _person});
+
   }
 }

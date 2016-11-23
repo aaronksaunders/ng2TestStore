@@ -1,0 +1,9 @@
+<md-toolbar color="primary">
+  Dialog Testing
+</md-toolbar>
+<p>It's Jazz!</p>
+<p><label>How much? <input #howMuch></label></p>
+<p> {{ jazzMessage }} </p>
+
+<button md-raised-button (click)="dialogRef.close(howMuch.value)">Close dialog</button>
+
