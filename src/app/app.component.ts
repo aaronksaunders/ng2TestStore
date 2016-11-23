@@ -1,15 +1,22 @@
+<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {FormGroup, FormControl, Validators} from '@angular/forms'
+=======
+import {Component} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs/Observable';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms'
+>>>>>>> origin/master
 
 
 /**
  *
  */
 export interface Person {
-    firstName : String,
-    lastName : String,
-    id : String,
+    firstName: String,
+    lastName: String,
+    id: String,
 }
 
 interface AppState {
@@ -33,7 +40,8 @@ interface AppState {
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+
+export class AppComponent {
     /**
      *
      *
@@ -56,33 +64,17 @@ export class AppComponent implements OnInit{
      *
      * @memberOf AppComponent
      */
-    constructor ( private _store: Store<AppState> ) {
+    constructor(private _store: Store<AppState>, private _fb: FormBuilder) {
         this.peopleArray = _store.select('people');
-    }
-    /**
-     *
-     * @memberOf AppComponent
-     */
-    ngOnInit () {
-        this.simpleForm = new FormGroup({
-            'firstName': new FormControl('', [Validators.required, Validators.minLength(5)]),
-            'lastName': new FormControl('', [Validators.required, Validators.minLength(5)]),
+
+        this.simpleForm = _fb.group({
+            'firstName': [null, Validators.required, Validators.minLength(8)],
+            'lastName': [null, Validators.required, Validators.minLength(8)],
         });
     }
-    /**
 
-     * @param {string} _controlName
+    /**
      *
-     * @memberOf AppComponent
-     */
-    errorHelper(_controlName:string) {
-        let control = this.simpleForm.controls[_controlName]
-        if (!control.pristine && control.errors) {
-            return control.errors
-        }
-    }
-    /**
-
      * @param {any} _person
      *
      * @memberOf AppComponent

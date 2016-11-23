@@ -4,24 +4,29 @@
 <div class="app-content">
     <div>
 
-        <form novalidate [formGroup]="simpleForm" (ngSubmit)="addPerson(simpleForm)">
+        <form [formGroup]="simpleForm" (ngSubmit)="addPerson(simpleForm)">
             <md-input #fn placeholder="First Name" maxlength="50"
-                      formControlName='firstName'>
+                      [formControl]="simpleForm.controls['firstName']">
                 <md-hint align="end">
                     {{fn.characterCount}} / 50
                 </md-hint>
             </md-input>
-            <md-input #ln placeholder="Last Name" maxlength="50" formControlName='lastName'>
+            <em *ngIf="simpleForm.controls['firstName'].hasError('minlength')">Must be at least 8 characters</em>
+            <md-input #ln placeholder="Last Name" maxlength="50"
+                      [formControl]="simpleForm.controls['lastName']">
                 <md-hint align="end">
                     {{ln.characterCount}} / 50
                 </md-hint>
             </md-input>
             <button type="submit" md-raised-button [disabled]="!simpleForm.valid">Add Person</button>
+<<<<<<< HEAD
 
             <!-- display errors -->
           <p>ERRORS:</p>
             <div>{{errorHelper('firstName') | json }}</div>
             <div>{{errorHelper('lastName') | json }}</div>
+=======
+>>>>>>> origin/master
         </form>
         <h2>Current Users: {{ (peopleArray | async)?.length }}</h2>
     </div>
