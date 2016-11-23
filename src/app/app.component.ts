@@ -8,9 +8,9 @@ import {FormGroup, FormBuilder, Validators} from '@angular/forms'
  *
  */
 export interface Person {
-    firstName : String,
-    lastName : String,
-    id : String,
+    firstName: String,
+    lastName: String,
+    id: String,
 }
 
 interface AppState {
@@ -62,8 +62,8 @@ export class AppComponent {
         this.peopleArray = _store.select('people');
 
         this.simpleForm = _fb.group({
-            'firstName': [null, Validators.required],
-            'lastName': [null, Validators.required],
+            'firstName': [null, Validators.required, Validators.minLength(8)],
+            'lastName': [null, Validators.required, Validators.minLength(8)],
         });
     }
 

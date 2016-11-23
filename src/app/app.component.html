@@ -11,6 +11,7 @@
                     {{fn.characterCount}} / 50
                 </md-hint>
             </md-input>
+            <em *ngIf="simpleForm.controls['firstName'].hasError('minlength')">Must be at least 8 characters</em>
             <md-input #ln placeholder="Last Name" maxlength="50"
                       [formControl]="simpleForm.controls['lastName']">
                 <md-hint align="end">
