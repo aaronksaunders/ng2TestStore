@@ -1,5 +1,5 @@
 <h1>
-    {{title}}
+   PAGE - {{title}}
 </h1>
 <div class="app-content">
     <div>
@@ -19,6 +19,7 @@
             <button type="submit" md-raised-button [disabled]="!simpleForm.valid">Add Person</button>
 
             <!-- display errors -->
+          <p>ERRORS:</p>
             <div>{{errorHelper('firstName') | json }}</div>
             <div>{{errorHelper('lastName') | json }}</div>
         </form>
